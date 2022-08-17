@@ -60,7 +60,7 @@ module.exports = {
           ],
         });
         await msg.react("✅");
-        interaction.user.send({
+        await interaction.user.send({
           embeds: [
             new EmbedBuilder()
               .setTitle(`New Report`)
@@ -87,6 +87,10 @@ module.exports = {
                 text: `  |  ${interaction.guild.name}`,
               }),
           ],
+        });
+        await interaction.reply({
+          ephemeral: true,
+          content: "Your report has been submitted! Please check your dms!",
         });
       } catch (error) {
         console.error(error);
