@@ -33,10 +33,10 @@ module.exports = {
     ),
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
+    try {
     const title = interaction.options.getString("title");
     const description = interaction.options.getString("description");
     const announceChannel = interaction.options.getChannel("channel");
-    try {
       await interaction.deferReply({ ephemeral: true });
       await interaction.editReply({
         ephemeral: true,

@@ -10,12 +10,16 @@ module.exports = {
 
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
-    const getStory = async () => {
-      const { data } = await axios.get(
-        "https://meme-api.herokuapp.com/gimme/TwoSentenceHorror"
-      );
-      console.log(data);
-    };
-    getStory();
+    try {
+      const getStory = async () => {
+        const { data } = await axios.get(
+          "https://meme-api.herokuapp.com/gimme/TwoSentenceHorror"
+        );
+        console.log(data);
+      };
+      getStory();
+    } catch (error) {
+      console.error(error);
+    }
   },
 };

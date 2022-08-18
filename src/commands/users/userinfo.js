@@ -12,8 +12,41 @@ module.exports = {
 
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
-    const userMentioned = interaction.options.getUser("user");
-    if (!userMentioned) {
+    try {
+      const userMentioned = interaction.options.getUser("user");
+      if (!userMentioned) {
+        return await interaction.reply({
+          ephemeral: true,
+          embeds: [
+            new EmbedBuilder()
+              .setTitle("User Information")
+              .setColor("Green")
+              .setFields(
+                {
+                  name: "User ID",
+                  value: interaction.user.id,
+                },
+                {
+                  name: "Tag",
+                  value: interaction.user.tag,
+                },
+                {
+                  name: "Bot",
+                  value: interaction.user.bot ? "Is a bot" : "Not a bot",
+                },
+                {
+                  name: "Created at",
+                  value: String(interaction.user.createdAt),
+                }
+              )
+              .setThumbnail(interaction.user.avatarURL())
+              .setFooter({
+                iconURL: interaction.guild.iconURL(),
+                text: `  |  ${interaction.guild.name}`,
+              }),
+          ],
+        });
+      }
       return await interaction.reply({
         ephemeral: true,
         embeds: [
@@ -23,59 +56,30 @@ module.exports = {
             .setFields(
               {
                 name: "User ID",
-                value: interaction.user.id,
+                value: userMentioned.id,
               },
               {
                 name: "Tag",
-                value: interaction.user.tag,
+                value: userMentioned.tag,
               },
               {
                 name: "Bot",
-                value: interaction.user.bot ? "Is a bot" : "Not a bot",
+                value: userMentioned.bot ? "Is a bot" : "Not a bot",
               },
               {
                 name: "Created at",
-                value: String(interaction.user.createdAt),
+                value: String(userMentioned.createdAt),
               }
             )
-            .setThumbnail(interaction.user.avatarURL())
+            .setThumbnail(userMentioned.avatarURL())
             .setFooter({
               iconURL: interaction.guild.iconURL(),
               text: `  |  ${interaction.guild.name}`,
             }),
         ],
       });
+    } catch (error) {
+      console.error(error);
     }
-    return await interaction.reply({
-      ephemeral: true,
-      embeds: [
-        new EmbedBuilder()
-          .setTitle("User Information")
-          .setColor("Green")
-          .setFields(
-            {
-              name: "User ID",
-              value: userMentioned.id,
-            },
-            {
-              name: "Tag",
-              value: userMentioned.tag,
-            },
-            {
-              name: "Bot",
-              value: userMentioned.bot ? "Is a bot" : "Not a bot",
-            },
-            {
-              name: "Created at",
-              value: String(userMentioned.createdAt),
-            }
-          )
-          .setThumbnail(userMentioned.avatarURL())
-          .setFooter({
-            iconURL: interaction.guild.iconURL(),
-            text: `  |  ${interaction.guild.name}`,
-          }),
-      ],
-    });
   },
 };

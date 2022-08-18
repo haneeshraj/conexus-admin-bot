@@ -19,12 +19,12 @@ module.exports = {
 
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
-    const details = interaction.options.getString("details");
-    const user = interaction.options.getUser("user") || "None";
-    const reportChannel = client.channels.cache.get("1006900401334931486");
+    try {
+      const details = interaction.options.getString("details");
+      const user = interaction.options.getUser("user") || "None";
+      const reportChannel = client.channels.cache.get("1006900401334931486");
 
-    const addReport = async () => {
-      try {
+      const addReport = async () => {
         const { data } = await axios.post(
           "http://localhost:3000/api/user-reports/",
           {
@@ -92,10 +92,10 @@ module.exports = {
           ephemeral: true,
           content: "Your report has been submitted! Please check your dms!",
         });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    addReport();
+      };
+      addReport();
+    } catch (error) {
+      console.error(error);
+    }
   },
 };

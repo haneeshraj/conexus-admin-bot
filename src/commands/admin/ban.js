@@ -24,9 +24,9 @@ module.exports = {
 
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
-    const userInfo = interaction.options.getMember("user"); // For ban
-    const reason = interaction.options.getString("reason");
     try {
+      const userInfo = interaction.options.getMember("user"); // For ban
+      const reason = interaction.options.getString("reason");
       if (
         !userInfo.permissions.has(
           PermissionFlagsBits.BanMembers |

@@ -7,13 +7,17 @@ module.exports = {
 
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
-    const randomNumb = Math.floor(Math.random() * 2) + 1;
-    await interaction.reply({
-      embeds: [
-        new EmbedBuilder()
-          .setTitle("Flipped!")
-          .setDescription(`It's ${randomNumb === 1 ? "Heads!" : "Tails!"}`),
-      ],
-    });
+    try {
+      const randomNumb = Math.floor(Math.random() * 2) + 1;
+      await interaction.reply({
+        embeds: [
+          new EmbedBuilder()
+            .setTitle("Flipped!")
+            .setDescription(`It's ${randomNumb === 1 ? "Heads!" : "Tails!"}`),
+        ],
+      });
+    } catch (error) {
+      console.error(error);
+    }
   },
 };

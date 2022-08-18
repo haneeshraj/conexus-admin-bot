@@ -4,7 +4,7 @@
   "description": "A nodeJS conexus admin discord bot",
   "main": "src/bot.js",
   "scripts": {
-    "db": "nodemon ./src/db/index.js",
+    "db": "node ./src/db/index.js",
     "start": "concurrently \"npm run db\" \"nodemon .\""
   },
   "author": "Haneesh Raj B.",

@@ -28,9 +28,9 @@ module.exports = {
 
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
-    const text = interaction.options.getString("text");
-    const msgChannel = interaction.options.getChannel("channel");
     try {
+      const text = interaction.options.getString("text");
+      const msgChannel = interaction.options.getChannel("channel");
       await interaction.reply({
         ephemeral: true,
         embeds: [

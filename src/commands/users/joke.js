@@ -8,12 +8,16 @@ module.exports = {
 
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
-    const getJoke = async () => {
-      const { data } = await axios.get(
-        "https://v2.jokeapi.dev/joke/Any?blacklistFlags=political,racist,sexist&type=single"
-      );
-      await interaction.reply(data.joke);
-    };
-    getJoke();
+    try {
+      const getJoke = async () => {
+        const { data } = await axios.get(
+          "https://v2.jokeapi.dev/joke/Any?blacklistFlags=political,racist,sexist&type=single"
+        );
+        await interaction.reply(data.joke);
+      };
+      getJoke();
+    } catch (error) {
+      console.error(error);
+    }
   },
 };

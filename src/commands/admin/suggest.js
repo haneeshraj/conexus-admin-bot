@@ -13,11 +13,7 @@ module.exports = {
         PermissionFlagsBits.ManageChannels |
         PermissionFlagsBits.ManageRoles
     )
-    .setDefaultMemberPermissions(
-      PermissionFlagsBits.ManageChannels |
-        PermissionFlagsBits.ManageMessages |
-        PermissionFlagsBits.ManageRoles
-    )
+
     .addStringOption((input) =>
       input
         .setName("title")
@@ -33,10 +29,10 @@ module.exports = {
 
   async execute(interaction, client) {
     if (!interaction.isChatInputCommand()) return;
-    const title = interaction.options.getString("title");
-    const details = interaction.options.getString("details");
-    const suggestChannel = client.channels.cache.get("1006099121955934228");
     try {
+      const title = interaction.options.getString("title");
+      const details = interaction.options.getString("details");
+      const suggestChannel = client.channels.cache.get("1006099121955934228");
       await interaction.reply({
         ephemeral: true,
         content: "The suggestion has been posted!",
